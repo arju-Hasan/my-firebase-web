@@ -2,6 +2,7 @@ import { auth } from "../Firebase.init";
 import { useContext,  } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { signOut } from "firebase/auth";
+import { Link } from "react-router";
 
 
 
@@ -21,13 +22,22 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar bg-gradient-to-b from-green-300 to-green-800 shadow-sm">
-  <div className="flex-1">
-    <a className="btn btn-ghost text-xl">My firebase web</a>
+        <div className="navbar bg-gradient-to-b from-green-300 to-green-800 shadow-sm flex justify-between items-center">
+ <div className="flex items-center">
+    <a className="btn btn-ghost text-xl">My Firebase Web</a>
   </div>
+{
+  user ?  
+  <div className="flex justify-center items-center">
+    <Link to={'/home'} className="px-2" >Home</Link>
+    <Link to={'/about'} className="px-2" >About</Link>
+  </div> : ""
+}
+ 
+ 
   {
     user? 
-  <div className="flex-none">     
+  <div className="flex justify-end items-center">     
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
         <div className="indicator">
@@ -68,10 +78,10 @@ const Navbar = () => {
       </ul>
     </div>    
   </div>
-  :<>
+  :<div className="flex">
     <h2 className="p-4">Signin</h2>
     <h2 className="p-4">Login</h2>
-    </>
+    </div>
     }
 </div>
     );
